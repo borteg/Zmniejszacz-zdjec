@@ -21,20 +21,19 @@ namespace Zmniejszacz_zdjęć
 
             if(args != null)
             {
-                FileHandler.AddFiles(args);
-
-                foreach(string arg in FileHandler.ReadFiles())
+                foreach(string arg in args)
                 {
-                    if (arg.Equals("--nogui"))
+                    if(arg.Equals("--nogui"))
                     {
                         noGui = true;
                     }
 
                     else
                     {
-                        Bitmap img = ImageHandler.Resize(arg);
-
-                        ImageHandler.Save(img, arg);
+                        if(ImageHandler.isImage(arg))
+                        {
+                            FileHandler.AddFile(arg);
+                        }
                     }
                 }
             }
@@ -42,6 +41,18 @@ namespace Zmniejszacz_zdjęć
             if (!noGui)
             {
                 Application.Run(new FormMain());
+            }
+
+            else
+            {
+                foreach (string path in FileHandler.ReadFiles())
+                {
+                    Bitmap img = ImageHandler.Resize(path);
+
+                    ImageHandler.Save(img, path);
+                }
+
+                MessageBox.Show("Zmniejszono pomyślnie");
             }
         }
     }

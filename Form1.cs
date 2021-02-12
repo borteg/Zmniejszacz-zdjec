@@ -20,6 +20,7 @@ namespace Zmniejszacz_zdjęć
         private void FormMain_Load(object sender, EventArgs e)
         {
             InitializeFileDialog();
+            RefreshIMGList(); 
         }
 
         private void FormMain_DragEnter(object sender, DragEventArgs e)
