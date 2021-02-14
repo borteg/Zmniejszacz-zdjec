@@ -7,11 +7,14 @@ using System.Linq;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
+using System.Drawing.Printing;
 
 namespace Zmniejszacz_zdjęć
 {
     public partial class FormMain : Form
     {
+        private MemoryStream stream = new MemoryStream();
+
         public FormMain()
         {
             InitializeComponent();
@@ -37,7 +40,7 @@ namespace Zmniejszacz_zdjęć
 
             foreach(string file in files)
             {
-                if(ImageHandler.isImage(file))
+                if(ImageHandler.isImage(file) && FileHandler.NotDuplicate(file))
                 {
                     FileHandler.AddFile(file);
                 }
@@ -57,6 +60,8 @@ namespace Zmniejszacz_zdjęć
         private void RefreshIMGList()
         {
             this.imgList.Items.Clear();
+
+            previewPic.Image = null;
 
             int i = 0;
 
@@ -108,11 +113,11 @@ namespace Zmniejszacz_zdjęć
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            if (this.openFileDialog.ShowDialog() == DialogResult.OK);
+            if (this.openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 foreach (string file in this.openFileDialog.FileNames)
                 {
-                    if (ImageHandler.isImage(file))
+                    if (ImageHandler.isImage(file) && FileHandler.NotDuplicate(file))
                     {
                         FileHandler.AddFile(file);
                     }
@@ -128,12 +133,21 @@ namespace Zmniejszacz_zdjęć
             {
                 try
                 {
-                    if(this.previewPic.Image != null)
+                    Image image = Image.FromFile(FileHandler.ReadFiles()[this.imgList.SelectedIndex]);
+
+                    stream.Position = 0;
+
+                    image.Save(stream, image.RawFormat);
+
+                    image.Dispose();
+
+                    if(previewPic.Image != null)
                     {
-                        this.previewPic.Image.Dispose();
+                        previewPic.Image.Dispose();
                     }
 
-                    this.previewPic.Image = Image.FromFile(FileHandler.ReadFiles()[this.imgList.SelectedIndex]);
+                    previewPic.Image = Image.FromStream(stream);
+
                 }
 
                 catch (FileNotFoundException)
@@ -181,6 +195,18 @@ namespace Zmniejszacz_zdjęć
                 FileHandler.ClearFiles();
 
                 RefreshIMGList();
+            }
+        }
+
+        private void previewPic_Click(object sender, EventArgs e)
+        {
+            if (previewPic.Image != null)
+            {
+                FormPicture formPicture = new FormPicture();
+
+                formPicture.SetPicture(stream);
+
+                formPicture.ShowDialog();
             }
         }
     }

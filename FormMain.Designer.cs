@@ -46,12 +46,14 @@
             this.previewPic.BackColor = System.Drawing.Color.Gray;
             this.previewPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.previewPic.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.previewPic.Cursor = System.Windows.Forms.Cursors.Default;
             this.previewPic.Location = new System.Drawing.Point(220, 25);
             this.previewPic.Name = "previewPic";
             this.previewPic.Size = new System.Drawing.Size(340, 313);
             this.previewPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.previewPic.TabIndex = 0;
             this.previewPic.TabStop = false;
+            this.previewPic.Click += new System.EventHandler(this.previewPic_Click);
             // 
             // addBtn
             // 

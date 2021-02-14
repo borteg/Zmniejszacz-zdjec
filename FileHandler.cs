@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Windows.Forms;
 using System.Xml.Schema;
 
 namespace Zmniejszacz_zdjęć
@@ -37,6 +38,21 @@ namespace Zmniejszacz_zdjęć
         public static void RemoveFile(int nFile)
         {
             files.RemoveAt(nFile);
+        }
+
+        public static bool NotDuplicate(string file1)
+        {
+            foreach(string file2 in files)
+            {
+                if(file1.Equals(file2))
+                {
+                    MessageBox.Show("Ten plik znajduje się już na liście: " + file1);
+
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

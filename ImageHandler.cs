@@ -16,6 +16,8 @@ namespace Zmniejszacz_zdjęć
         private static int _maxWidth = 1024, _maxHeight = 1024;
         private static long _quality = 80;
 
+        private static Bitmap origImage;
+
         public static int MaxWidth
         {
             get => _maxWidth;
@@ -36,7 +38,16 @@ namespace Zmniejszacz_zdjęć
 
         public static Bitmap Resize(string imagePath)
         {
-            Bitmap origImage = new Bitmap(imagePath);
+            try
+            {
+                origImage = new Bitmap(imagePath);
+            }
+
+            catch(FileNotFoundException)
+            {
+                MessageBox.Show("Nie znaleziono pliku: " + imagePath);
+                origImage.Dispose();
+            }
 
             int origWidth = origImage.Width;
             int origHeight = origImage.Height;
@@ -73,7 +84,6 @@ namespace Zmniejszacz_zdjęć
 
             return newImage;
         }
-
 
         public static void Save(Bitmap image, string path)
         {
