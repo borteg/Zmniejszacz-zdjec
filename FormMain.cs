@@ -52,7 +52,7 @@ namespace Zmniejszacz_zdjęć
         private void InitializeFileDialog()
         {
             this.openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            this.openFileDialog.Filter = "Zdjęcia (*.bmp; *.jpg; *.jpeg; *.gif)|*.bmp; *.jpg; *.jpeg; *.gif|Wszystkie pliki (*.*)|*.*";
+            this.openFileDialog.Filter = "Zdjęcia (*.bmp; *.gif; *.jpg; *.jpeg; *.png; *.tiff)|*.bmp; *.gif; *.jpg; *.jpeg; *.png; *.tiff|Wszystkie pliki (*.*)|*.*";
             this.openFileDialog.Multiselect = true;
             this.openFileDialog.RestoreDirectory = true;
         }
@@ -62,6 +62,7 @@ namespace Zmniejszacz_zdjęć
             this.imgList.Items.Clear();
 
             previewPic.Image = null;
+            previewPic.Cursor = Cursors.Default;
 
             int i = 0;
 
@@ -70,6 +71,16 @@ namespace Zmniejszacz_zdjęć
 
                 i++;
                 this.imgList.Items.Add(i + "." + Path.GetFileName(file));
+            }
+
+            if(imgList.Items.Count > 0)
+            {
+                saveBtn.Enabled = true;
+            }
+
+            else
+            {
+                saveBtn.Enabled = false;
             }
         }
 
@@ -148,6 +159,7 @@ namespace Zmniejszacz_zdjęć
 
                     previewPic.Image = Image.FromStream(stream);
 
+                    previewPic.Cursor = Cursors.Hand;
                 }
 
                 catch (FileNotFoundException)
@@ -197,7 +209,7 @@ namespace Zmniejszacz_zdjęć
                 RefreshIMGList();
             }
         }
-
+                
         private void previewPic_Click(object sender, EventArgs e)
         {
             if (previewPic.Image != null)
@@ -208,6 +220,13 @@ namespace Zmniejszacz_zdjęć
 
                 formPicture.ShowDialog();
             }
+        }
+
+        private void btnAdvanced_Click(object sender, EventArgs e)
+        {
+            FormAdvanced formAdvanced = new FormAdvanced();
+
+            formAdvanced.ShowDialog();
         }
     }
 }
