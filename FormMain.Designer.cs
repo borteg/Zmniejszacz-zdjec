@@ -34,12 +34,15 @@
             this.imgList = new System.Windows.Forms.ListBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.overwriteCheck = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.clrButton = new System.Windows.Forms.Button();
             this.btnAdvanced = new System.Windows.Forms.Button();
+            this.groupBoxPictures = new System.Windows.Forms.GroupBox();
+            this.groupBoxSave = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.previewPic)).BeginInit();
+            this.groupBoxPictures.SuspendLayout();
+            this.groupBoxSave.SuspendLayout();
             this.SuspendLayout();
             // 
             // previewPic
@@ -48,10 +51,9 @@
             this.previewPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.previewPic.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.previewPic.Cursor = System.Windows.Forms.Cursors.Default;
-            this.previewPic.Location = new System.Drawing.Point(330, 38);
-            this.previewPic.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.previewPic.Location = new System.Drawing.Point(225, 16);
             this.previewPic.Name = "previewPic";
-            this.previewPic.Size = new System.Drawing.Size(508, 482);
+            this.previewPic.Size = new System.Drawing.Size(347, 332);
             this.previewPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.previewPic.TabIndex = 0;
             this.previewPic.TabStop = false;
@@ -59,10 +61,9 @@
             // 
             // addBtn
             // 
-            this.addBtn.Location = new System.Drawing.Point(30, 38);
-            this.addBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.addBtn.Location = new System.Drawing.Point(14, 25);
             this.addBtn.Name = "addBtn";
-            this.addBtn.Size = new System.Drawing.Size(112, 35);
+            this.addBtn.Size = new System.Drawing.Size(75, 23);
             this.addBtn.TabIndex = 1;
             this.addBtn.Text = "Dodaj";
             this.addBtn.UseVisualStyleBackColor = true;
@@ -70,10 +71,9 @@
             // 
             // saveBtn
             // 
-            this.saveBtn.Location = new System.Drawing.Point(105, 431);
-            this.saveBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.saveBtn.Location = new System.Drawing.Point(60, 45);
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(112, 35);
+            this.saveBtn.Size = new System.Drawing.Size(75, 23);
             this.saveBtn.TabIndex = 2;
             this.saveBtn.Text = "Zapisz";
             this.saveBtn.UseVisualStyleBackColor = true;
@@ -83,22 +83,19 @@
             // 
             this.imgList.FormattingEnabled = true;
             this.imgList.HorizontalScrollbar = true;
-            this.imgList.ItemHeight = 20;
-            this.imgList.Location = new System.Drawing.Point(30, 100);
-            this.imgList.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.imgList.Location = new System.Drawing.Point(14, 60);
             this.imgList.Name = "imgList";
             this.imgList.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.imgList.Size = new System.Drawing.Size(253, 144);
+            this.imgList.Size = new System.Drawing.Size(170, 95);
             this.imgList.TabIndex = 3;
             this.imgList.SelectedIndexChanged += new System.EventHandler(this.imgList_SelectedIndexChanged);
             this.imgList.KeyUp += new System.Windows.Forms.KeyEventHandler(this.imgList_DeletePressed);
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(64, 485);
-            this.progressBar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.progressBar.Location = new System.Drawing.Point(35, 78);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(188, 35);
+            this.progressBar.Size = new System.Drawing.Size(125, 23);
             this.progressBar.Step = 1;
             this.progressBar.TabIndex = 4;
             // 
@@ -107,30 +104,18 @@
             this.overwriteCheck.AutoSize = true;
             this.overwriteCheck.Checked = true;
             this.overwriteCheck.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.overwriteCheck.Location = new System.Drawing.Point(112, 387);
-            this.overwriteCheck.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.overwriteCheck.Location = new System.Drawing.Point(67, 21);
             this.overwriteCheck.Name = "overwriteCheck";
-            this.overwriteCheck.Size = new System.Drawing.Size(92, 24);
+            this.overwriteCheck.Size = new System.Drawing.Size(64, 17);
             this.overwriteCheck.TabIndex = 5;
             this.overwriteCheck.Text = "Nadpisz";
             this.overwriteCheck.UseVisualStyleBackColor = true;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(326, 14);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 20);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Podgląd";
-            // 
             // clrButton
             // 
-            this.clrButton.Location = new System.Drawing.Point(172, 38);
-            this.clrButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.clrButton.Location = new System.Drawing.Point(109, 25);
             this.clrButton.Name = "clrButton";
-            this.clrButton.Size = new System.Drawing.Size(112, 35);
+            this.clrButton.Size = new System.Drawing.Size(75, 23);
             this.clrButton.TabIndex = 7;
             this.clrButton.Text = "Wyczyść";
             this.clrButton.UseMnemonic = false;
@@ -139,39 +124,61 @@
             // 
             // btnAdvanced
             // 
-            this.btnAdvanced.Location = new System.Drawing.Point(91, 270);
+            this.btnAdvanced.Location = new System.Drawing.Point(62, 199);
+            this.btnAdvanced.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdvanced.Name = "btnAdvanced";
-            this.btnAdvanced.Size = new System.Drawing.Size(140, 35);
+            this.btnAdvanced.Size = new System.Drawing.Size(93, 23);
             this.btnAdvanced.TabIndex = 8;
             this.btnAdvanced.Text = "Zaawansowane";
             this.btnAdvanced.UseVisualStyleBackColor = true;
             this.btnAdvanced.Click += new System.EventHandler(this.btnAdvanced_Click);
             // 
+            // groupBoxPictures
+            // 
+            this.groupBoxPictures.Controls.Add(this.addBtn);
+            this.groupBoxPictures.Controls.Add(this.clrButton);
+            this.groupBoxPictures.Controls.Add(this.imgList);
+            this.groupBoxPictures.Location = new System.Drawing.Point(11, 10);
+            this.groupBoxPictures.Name = "groupBoxPictures";
+            this.groupBoxPictures.Size = new System.Drawing.Size(200, 175);
+            this.groupBoxPictures.TabIndex = 9;
+            this.groupBoxPictures.TabStop = false;
+            this.groupBoxPictures.Text = "Zdjęcia";
+            // 
+            // groupBoxSave
+            // 
+            this.groupBoxSave.Controls.Add(this.progressBar);
+            this.groupBoxSave.Controls.Add(this.saveBtn);
+            this.groupBoxSave.Controls.Add(this.overwriteCheck);
+            this.groupBoxSave.Location = new System.Drawing.Point(11, 232);
+            this.groupBoxSave.Name = "groupBoxSave";
+            this.groupBoxSave.Size = new System.Drawing.Size(200, 116);
+            this.groupBoxSave.TabIndex = 8;
+            this.groupBoxSave.TabStop = false;
+            this.groupBoxSave.Text = "Zapisywanie";
+            // 
             // FormMain
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(876, 555);
+            this.ClientSize = new System.Drawing.Size(584, 361);
+            this.Controls.Add(this.groupBoxSave);
+            this.Controls.Add(this.groupBoxPictures);
             this.Controls.Add(this.btnAdvanced);
-            this.Controls.Add(this.clrButton);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.overwriteCheck);
-            this.Controls.Add(this.progressBar);
-            this.Controls.Add(this.imgList);
-            this.Controls.Add(this.saveBtn);
-            this.Controls.Add(this.addBtn);
             this.Controls.Add(this.previewPic);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MaximizeBox = false;
             this.Name = "FormMain";
             this.Text = "Zmniejszacz Zdjęć";
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.FormMain_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.FormMain_DragEnter);
             ((System.ComponentModel.ISupportInitialize)(this.previewPic)).EndInit();
+            this.groupBoxPictures.ResumeLayout(false);
+            this.groupBoxSave.ResumeLayout(false);
+            this.groupBoxSave.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -183,11 +190,12 @@
         private System.Windows.Forms.ListBox imgList;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.CheckBox overwriteCheck;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.Button clrButton;
         private System.Windows.Forms.Button btnAdvanced;
+        private System.Windows.Forms.GroupBox groupBoxPictures;
+        private System.Windows.Forms.GroupBox groupBoxSave;
     }
 }
 

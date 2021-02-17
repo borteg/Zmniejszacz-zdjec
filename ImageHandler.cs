@@ -16,7 +16,7 @@ namespace Zmniejszacz_zdjęć
         private static int _maxWidth = 1024, _maxHeight = 1024;
         private static long _quality = 80;
 
-        private static Bitmap origImage;
+        private static Bitmap newImage;
 
         public static int MaxWidth
         {
@@ -36,17 +36,20 @@ namespace Zmniejszacz_zdjęć
             set => _quality = value;
         }
 
-        public static Bitmap Resize(string imagePath)
+        public static bool Resize(string imagePath)
         {
+            Bitmap origImage;
+
             try
             {
                 origImage = new Bitmap(imagePath);
             }
 
-            catch(FileNotFoundException)
+            catch(Exception)
             {
-                MessageBox.Show("Nie znaleziono pliku: " + imagePath);
-                origImage.Dispose();
+                MessageBox.Show("Nie można odczytać pliku: " + imagePath);
+
+                return false;
             }
 
             int origWidth = origImage.Width;
@@ -70,7 +73,7 @@ namespace Zmniejszacz_zdjęć
                 newHeight = origHeight;
             }
 
-            Bitmap newImage = new Bitmap(newWidth, newHeight, PixelFormat.Format24bppRgb);
+            newImage = new Bitmap(newWidth, newHeight, origImage.PixelFormat);
 
             using (Graphics graphics = Graphics.FromImage(newImage))
             {
@@ -82,10 +85,10 @@ namespace Zmniejszacz_zdjęć
 
             origImage.Dispose();
 
-            return newImage;
+            return true;
         }
 
-        public static void Save(Bitmap image, string path)
+        public static void Save(string path)
         {
             ImageCodecInfo imageCodecInfo = GetEncoderInfo(ImageFormat.Jpeg);
 
@@ -97,9 +100,20 @@ namespace Zmniejszacz_zdjęć
 
             encoderParameters.Param[0] = encoderParameter;
 
-            image.Save(path, imageCodecInfo, encoderParameters);
+            try
+            {
+                newImage.Save(path, imageCodecInfo, encoderParameters);
+            }
 
-            image.Dispose();
+            catch(Exception)
+            {
+                MessageBox.Show("Nie udało się zapisać pliku: " + path);
+            }
+
+            if(newImage != null)
+            {
+                newImage.Dispose();
+            }
         }
 
         private static ImageCodecInfo GetEncoderInfo(ImageFormat format)
@@ -107,15 +121,18 @@ namespace Zmniejszacz_zdjęć
             return ImageCodecInfo.GetImageDecoders().SingleOrDefault(c => c.FormatID == format.Guid);
         }
 
-        public static bool isImage(string file)
+        public static bool isJpeg(string file)
         {
             try
             {
-                Image image = Image.FromFile(file);
-                
-                if(image != null)
+                using(Image image = Image.FromFile(file))
                 {
-                    image.Dispose();
+                    if(!image.RawFormat.Equals(ImageFormat.Jpeg))
+                    {
+                        MessageBox.Show("Nieprawidłowy format pliku: " + file);
+
+                        return false;
+                    }
                 }
             }
 

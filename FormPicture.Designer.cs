@@ -37,7 +37,7 @@
             this.previewPicForm.Location = new System.Drawing.Point(0, 0);
             this.previewPicForm.Margin = new System.Windows.Forms.Padding(0);
             this.previewPicForm.Name = "previewPicForm";
-            this.previewPicForm.Size = new System.Drawing.Size(783, 561);
+            this.previewPicForm.Size = new System.Drawing.Size(894, 661);
             this.previewPicForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.previewPicForm.TabIndex = 0;
             this.previewPicForm.TabStop = false;
@@ -47,7 +47,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(894, 661);
             this.Controls.Add(this.previewPicForm);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;

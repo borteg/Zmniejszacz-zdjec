@@ -40,7 +40,7 @@ namespace Zmniejszacz_zdjęć
 
             foreach(string file in files)
             {
-                if(ImageHandler.isImage(file) && FileHandler.NotDuplicate(file))
+                if(ImageHandler.isJpeg(file) && FileHandler.NotDuplicate(file))
                 {
                     FileHandler.AddFile(file);
                 }
@@ -52,7 +52,7 @@ namespace Zmniejszacz_zdjęć
         private void InitializeFileDialog()
         {
             this.openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            this.openFileDialog.Filter = "Zdjęcia (*.bmp; *.gif; *.jpg; *.jpeg; *.png; *.tiff)|*.bmp; *.gif; *.jpg; *.jpeg; *.png; *.tiff|Wszystkie pliki (*.*)|*.*";
+            this.openFileDialog.Filter = "Zdjęcia (*.jpg; *.jpeg)|*.jpg; *.jpeg|Wszystkie pliki (*.*)|*.*";
             this.openFileDialog.Multiselect = true;
             this.openFileDialog.RestoreDirectory = true;
         }
@@ -86,17 +86,16 @@ namespace Zmniejszacz_zdjęć
 
         private bool ResizeAndSave()
         {
-            Bitmap image;
-
             progressBar.Maximum = imgList.Items.Count;
 
             if (overwriteCheck.Checked)
             {
                 foreach (string file in FileHandler.ReadFiles())
                 {
-                    image = ImageHandler.Resize(file);
-
-                    ImageHandler.Save(image, file);
+                    if(ImageHandler.Resize(file))
+                    {
+                        ImageHandler.Save(file);
+                    }
 
                     progressBar.PerformStep();
                 }
@@ -110,9 +109,10 @@ namespace Zmniejszacz_zdjęć
 
                     foreach (string file in FileHandler.ReadFiles())
                     {
-                        image = ImageHandler.Resize(file);
-
-                        ImageHandler.Save(image, Path.Combine(newPath, Path.GetFileName(file)));
+                        if(ImageHandler.Resize(file))
+                        {
+                            ImageHandler.Save(Path.Combine(newPath, Path.GetFileName(file)));
+                        }
 
                         progressBar.PerformStep();
                     }
@@ -128,7 +128,7 @@ namespace Zmniejszacz_zdjęć
             {
                 foreach (string file in this.openFileDialog.FileNames)
                 {
-                    if (ImageHandler.isImage(file) && FileHandler.NotDuplicate(file))
+                    if (ImageHandler.isJpeg(file) && FileHandler.NotDuplicate(file))
                     {
                         FileHandler.AddFile(file);
                     }
@@ -192,12 +192,28 @@ namespace Zmniejszacz_zdjęć
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
+            groupBoxPictures.Enabled = false;
+            groupBoxSave.Enabled = false;
+
+            btnAdvanced.Enabled = false;
+            previewPic.Enabled = false;
+
+            this.Cursor = Cursors.WaitCursor;
+
             if(ResizeAndSave())
             {
                 MessageBox.Show("Zmniejszono i zapisano pomyślnie");
+                
+                this.Cursor = Cursors.Default;
             }
 
             progressBar.Value = 0;
+
+            groupBoxPictures.Enabled = true;
+            groupBoxSave.Enabled = true;
+
+            btnAdvanced.Enabled = true;
+            previewPic.Enabled = true;
         }
 
         private void clrButton_Click(object sender, EventArgs e)

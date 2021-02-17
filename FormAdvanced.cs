@@ -41,21 +41,6 @@ namespace Zmniejszacz_zdjęć
             CheckChanges();
         }
 
-        private void checkConvert_CheckedChanged(object sender, EventArgs e)
-        {
-            if(checkConvert.Checked)
-            {
-                changedFormat.Enabled = true;
-            }
-
-            else
-            {
-                changedFormat.Enabled = false;
-            }
-
-            CheckChanges();
-        }
-
         private void FormAdvanced_Load(object sender, EventArgs e)
         {
             UserMaxWidth.Value = ImageHandler.MaxWidth;
@@ -88,8 +73,7 @@ namespace Zmniejszacz_zdjęć
         {
             if(tempWidth == ImageHandler.MaxWidth &&
                tempHeight == ImageHandler.MaxHeight &&
-               tempQuality == ImageHandler.Quality &&
-               checkConvert.Checked == false)
+               tempQuality == ImageHandler.Quality)
             {
                 btnApply.Enabled = false;
             }

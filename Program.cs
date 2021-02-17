@@ -30,7 +30,7 @@ namespace Zmniejszacz_zdjęć
 
                     else
                     {
-                        if(ImageHandler.isImage(arg))
+                        if(ImageHandler.isJpeg(arg))
                         {
                             FileHandler.AddFile(arg);
                         }
@@ -47,9 +47,10 @@ namespace Zmniejszacz_zdjęć
             {
                 foreach (string path in FileHandler.ReadFiles())
                 {
-                    Bitmap img = ImageHandler.Resize(path);
-
-                    ImageHandler.Save(img, path);
+                    if(ImageHandler.Resize(path))
+                    {
+                        ImageHandler.Save(path);
+                    }
                 }
 
                 MessageBox.Show("Zmniejszono pomyślnie");
