@@ -84,9 +84,11 @@ namespace Zmniejszacz_zdjęć
             }
         }
 
-        private bool ResizeAndSave()
+        private int ResizeAndSave()
         {
             progressBar.Maximum = imgList.Items.Count;
+
+            int filesSaves = 0;
 
             if (overwriteCheck.Checked)
             {
@@ -94,7 +96,10 @@ namespace Zmniejszacz_zdjęć
                 {
                     if(ImageHandler.Resize(file))
                     {
-                        ImageHandler.Save(file);
+                        if(ImageHandler.Save(file))
+                        {
+                            filesSaves++;
+                        }
                     }
 
                     progressBar.PerformStep();
@@ -106,12 +111,27 @@ namespace Zmniejszacz_zdjęć
                 if (this.folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 {
                     string newPath = folderBrowserDialog.SelectedPath;
+                    string fileName;
 
                     foreach (string file in FileHandler.ReadFiles())
                     {
+                        fileName = Path.GetFileName(file);
+
+                        int count = 0;
+
+                        while(File.Exists(Path.Combine(newPath, fileName)))
+                        {
+                            count++;
+
+                            fileName = "(" + count + ")" + Path.GetFileName(file);
+                        }
+
                         if(ImageHandler.Resize(file))
                         {
-                            ImageHandler.Save(Path.Combine(newPath, Path.GetFileName(file)));
+                            if(ImageHandler.Save(Path.Combine(newPath, fileName)))
+                            {
+                                filesSaves++;
+                            }
                         }
 
                         progressBar.PerformStep();
@@ -119,7 +139,7 @@ namespace Zmniejszacz_zdjęć
                 }
             }
 
-            return true;
+            return filesSaves;
         }
 
         private void addBtn_Click(object sender, EventArgs e)
@@ -164,7 +184,7 @@ namespace Zmniejszacz_zdjęć
 
                 catch (FileNotFoundException)
                 {
-                    MessageBox.Show("Nie znaleziono pliku: " + FileHandler.ReadFiles()[this.imgList.SelectedIndex]);
+                    MessageBox.Show("Nie znaleziono pliku: " + FileHandler.ReadFiles()[this.imgList.SelectedIndex], "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     FileHandler.RemoveFile(this.imgList.SelectedIndex);
                     RefreshIMGList();
@@ -172,7 +192,7 @@ namespace Zmniejszacz_zdjęć
 
                 catch (OutOfMemoryException)
                 {
-                    MessageBox.Show("Nieprawidłowy format pliku: " + FileHandler.ReadFiles()[this.imgList.SelectedIndex]);
+                    MessageBox.Show("Nieprawidłowy format pliku: " + FileHandler.ReadFiles()[this.imgList.SelectedIndex], "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     FileHandler.RemoveFile(this.imgList.SelectedIndex);
                     RefreshIMGList();
@@ -192,28 +212,50 @@ namespace Zmniejszacz_zdjęć
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
-            groupBoxPictures.Enabled = false;
-            groupBoxSave.Enabled = false;
+            bool ok = true;
 
-            btnAdvanced.Enabled = false;
-            previewPic.Enabled = false;
-
-            this.Cursor = Cursors.WaitCursor;
-
-            if(ResizeAndSave())
+            if(overwriteCheck.Checked)
             {
-                MessageBox.Show("Zmniejszono i zapisano pomyślnie");
-                
-                this.Cursor = Cursors.Default;
+                DialogResult dialogResult = MessageBox.Show("Czy na pewno nadpisać?", "Nadpisz", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if(dialogResult == DialogResult.No)
+                {
+                    ok = false;
+                }
             }
+            
+            if(ok)
+            {
+                groupBoxPictures.Enabled = false;
+                groupBoxSave.Enabled = false;
 
-            progressBar.Value = 0;
+                btnAdvanced.Enabled = false;
+                previewPic.Enabled = false;
 
-            groupBoxPictures.Enabled = true;
-            groupBoxSave.Enabled = true;
+                this.Cursor = Cursors.WaitCursor;
 
-            btnAdvanced.Enabled = true;
-            previewPic.Enabled = true;
+                int filesSaves = ResizeAndSave();
+
+                if (filesSaves > 0)
+                {
+                    MessageBox.Show("Zmniejszono i zapisano pomyślnie " + filesSaves + " z " + imgList.Items.Count + " zdjęć", "Podsumowanie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.Cursor = Cursors.Default;
+                }
+
+                else
+                {
+                    this.Cursor = Cursors.Default;
+                }
+
+                progressBar.Value = 0;
+
+                groupBoxPictures.Enabled = true;
+                groupBoxSave.Enabled = true;
+
+                btnAdvanced.Enabled = true;
+                previewPic.Enabled = true;
+            }
         }
 
         private void clrButton_Click(object sender, EventArgs e)

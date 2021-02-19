@@ -46,7 +46,7 @@ namespace Zmniejszacz_zdjęć
             {
                 if(file1.Equals(file2))
                 {
-                    MessageBox.Show("Ten plik znajduje się już na liście: " + file1);
+                    MessageBox.Show("Ten plik znajduje się już na liście: " + file1, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     return false;
                 }

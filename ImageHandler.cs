@@ -43,11 +43,18 @@ namespace Zmniejszacz_zdjęć
             try
             {
                 origImage = new Bitmap(imagePath);
+
+                if (!origImage.RawFormat.Equals(ImageFormat.Jpeg))
+                {
+                    MessageBox.Show("Nieprawidłowy format pliku: " + imagePath, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    return false;
+                }
             }
 
             catch(Exception)
             {
-                MessageBox.Show("Nie można odczytać pliku: " + imagePath);
+                MessageBox.Show("Nie można odczytać pliku: " + imagePath, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return false;
             }
@@ -88,7 +95,7 @@ namespace Zmniejszacz_zdjęć
             return true;
         }
 
-        public static void Save(string path)
+        public static bool Save(string path)
         {
             ImageCodecInfo imageCodecInfo = GetEncoderInfo(ImageFormat.Jpeg);
 
@@ -107,13 +114,26 @@ namespace Zmniejszacz_zdjęć
 
             catch(Exception)
             {
-                MessageBox.Show("Nie udało się zapisać pliku: " + path);
+                if (!Install.IsAdmin())
+                {
+                    MessageBox.Show("Nie udało się zapisać pliku: " + path + "\nUpewnij się, że nie są wymagane uprawnienia administratora.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                else
+                {
+                    MessageBox.Show("Nie udało się zapisać pliku: " + path, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+
+                return false;
             }
 
             if(newImage != null)
             {
                 newImage.Dispose();
             }
+
+            return true;
         }
 
         private static ImageCodecInfo GetEncoderInfo(ImageFormat format)
@@ -129,7 +149,7 @@ namespace Zmniejszacz_zdjęć
                 {
                     if(!image.RawFormat.Equals(ImageFormat.Jpeg))
                     {
-                        MessageBox.Show("Nieprawidłowy format pliku: " + file);
+                        MessageBox.Show("Nieprawidłowy format pliku: " + file, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                         return false;
                     }
@@ -138,14 +158,14 @@ namespace Zmniejszacz_zdjęć
 
             catch (FileNotFoundException)
             {
-                MessageBox.Show("Nie znaleziono pliku: " + file);
+                MessageBox.Show("Nie znaleziono pliku: " + file, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return false;
             }
 
             catch(OutOfMemoryException)
             {
-                MessageBox.Show("Nieprawidłowy format pliku: " + file);
+                MessageBox.Show("Nieprawidłowy format pliku: " + file, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return false;
             }

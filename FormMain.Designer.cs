@@ -104,6 +104,7 @@
             this.overwriteCheck.AutoSize = true;
             this.overwriteCheck.Checked = true;
             this.overwriteCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.overwriteCheck.ForeColor = System.Drawing.Color.Red;
             this.overwriteCheck.Location = new System.Drawing.Point(67, 21);
             this.overwriteCheck.Name = "overwriteCheck";
             this.overwriteCheck.Size = new System.Drawing.Size(64, 17);
