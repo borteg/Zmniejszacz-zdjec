@@ -23,7 +23,10 @@ namespace Zmniejszacz_zdjęć
         private void FormMain_Load(object sender, EventArgs e)
         {
             InitializeFileDialog();
-            RefreshIMGList(); 
+
+            saveBtn.Enabled = false;
+
+            FileHandler.ReadFiles().CollectionChanged += RefreshIMGList;
         }
 
         private void FormMain_DragEnter(object sender, DragEventArgs e)
@@ -45,8 +48,6 @@ namespace Zmniejszacz_zdjęć
                     FileHandler.AddFile(file);
                 }
             }
-
-            RefreshIMGList();
         }
 
         private void InitializeFileDialog()
@@ -57,7 +58,7 @@ namespace Zmniejszacz_zdjęć
             this.openFileDialog.RestoreDirectory = true;
         }
 
-        private void RefreshIMGList()
+        private void RefreshIMGList(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             this.imgList.Items.Clear();
 
@@ -153,8 +154,6 @@ namespace Zmniejszacz_zdjęć
                         FileHandler.AddFile(file);
                     }
                 }
-
-                RefreshIMGList();
             }
         }
 
@@ -187,7 +186,6 @@ namespace Zmniejszacz_zdjęć
                     MessageBox.Show("Nie znaleziono pliku: " + FileHandler.ReadFiles()[this.imgList.SelectedIndex], "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     FileHandler.RemoveFile(this.imgList.SelectedIndex);
-                    RefreshIMGList();
                 }
 
                 catch (OutOfMemoryException)
@@ -195,7 +193,6 @@ namespace Zmniejszacz_zdjęć
                     MessageBox.Show("Nieprawidłowy format pliku: " + FileHandler.ReadFiles()[this.imgList.SelectedIndex], "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     FileHandler.RemoveFile(this.imgList.SelectedIndex);
-                    RefreshIMGList();
                 }
             }
         }
@@ -205,8 +202,6 @@ namespace Zmniejszacz_zdjęć
             if(e.KeyCode == Keys.Delete && this.imgList.SelectedIndex != -1)
             {
                 FileHandler.RemoveFile(this.imgList.SelectedIndex);
-
-                RefreshIMGList();
             }
         }
 
@@ -263,8 +258,6 @@ namespace Zmniejszacz_zdjęć
             if(imgList.Items.Count > 0)
             {
                 FileHandler.ClearFiles();
-
-                RefreshIMGList();
             }
         }
                 

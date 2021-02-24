@@ -53,7 +53,7 @@ namespace Zmniejszacz_zdjęć
             // 
             this.btnApply.Enabled = false;
             this.btnApply.Location = new System.Drawing.Point(27, 238);
-            this.btnApply.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnApply.Margin = new System.Windows.Forms.Padding(2);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(73, 23);
             this.btnApply.TabIndex = 2;
@@ -64,7 +64,7 @@ namespace Zmniejszacz_zdjęć
             // btnCancel
             // 
             this.btnCancel.Location = new System.Drawing.Point(146, 238);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(73, 23);
             this.btnCancel.TabIndex = 3;
@@ -98,7 +98,7 @@ namespace Zmniejszacz_zdjęć
             "10",
             "5"});
             this.changedQuality.Location = new System.Drawing.Point(16, 51);
-            this.changedQuality.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.changedQuality.Margin = new System.Windows.Forms.Padding(2);
             this.changedQuality.Name = "changedQuality";
             this.changedQuality.Size = new System.Drawing.Size(82, 21);
             this.changedQuality.TabIndex = 5;
@@ -108,12 +108,13 @@ namespace Zmniejszacz_zdjęć
             // 
             this.btnInstall.Enabled = false;
             this.btnInstall.Location = new System.Drawing.Point(33, 52);
-            this.btnInstall.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnInstall.Margin = new System.Windows.Forms.Padding(2);
             this.btnInstall.Name = "btnInstall";
             this.btnInstall.Size = new System.Drawing.Size(80, 23);
             this.btnInstall.TabIndex = 7;
             this.btnInstall.Text = "Instaluj";
             this.btnInstall.UseVisualStyleBackColor = true;
+            this.btnInstall.Click += new System.EventHandler(this.btnInstall_Click);
             // 
             // groupBoxResolution
             // 
@@ -122,9 +123,9 @@ namespace Zmniejszacz_zdjęć
             this.groupBoxResolution.Controls.Add(this.labelHeight);
             this.groupBoxResolution.Controls.Add(this.labelWidth);
             this.groupBoxResolution.Location = new System.Drawing.Point(11, 8);
-            this.groupBoxResolution.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxResolution.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxResolution.Name = "groupBoxResolution";
-            this.groupBoxResolution.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxResolution.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxResolution.Size = new System.Drawing.Size(99, 110);
             this.groupBoxResolution.TabIndex = 8;
             this.groupBoxResolution.TabStop = false;
@@ -133,7 +134,7 @@ namespace Zmniejszacz_zdjęć
             // UserMaxHeight
             // 
             this.UserMaxHeight.Location = new System.Drawing.Point(10, 74);
-            this.UserMaxHeight.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.UserMaxHeight.Margin = new System.Windows.Forms.Padding(2);
             this.UserMaxHeight.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -157,7 +158,7 @@ namespace Zmniejszacz_zdjęć
             // UserMaxWidth
             // 
             this.UserMaxWidth.Location = new System.Drawing.Point(10, 34);
-            this.UserMaxWidth.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.UserMaxWidth.Margin = new System.Windows.Forms.Padding(2);
             this.UserMaxWidth.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -213,9 +214,9 @@ namespace Zmniejszacz_zdjęć
             this.groupBoxQuality.Controls.Add(this.labelQuality);
             this.groupBoxQuality.Controls.Add(this.changedQuality);
             this.groupBoxQuality.Location = new System.Drawing.Point(121, 8);
-            this.groupBoxQuality.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxQuality.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxQuality.Name = "groupBoxQuality";
-            this.groupBoxQuality.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxQuality.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxQuality.Size = new System.Drawing.Size(115, 110);
             this.groupBoxQuality.TabIndex = 10;
             this.groupBoxQuality.TabStop = false;
@@ -226,9 +227,9 @@ namespace Zmniejszacz_zdjęć
             this.groupBoxInstall.Controls.Add(this.labelAdminInfo);
             this.groupBoxInstall.Controls.Add(this.btnInstall);
             this.groupBoxInstall.Location = new System.Drawing.Point(50, 130);
-            this.groupBoxInstall.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxInstall.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxInstall.Name = "groupBoxInstall";
-            this.groupBoxInstall.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxInstall.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxInstall.Size = new System.Drawing.Size(147, 88);
             this.groupBoxInstall.TabIndex = 11;
             this.groupBoxInstall.TabStop = false;
@@ -256,7 +257,7 @@ namespace Zmniejszacz_zdjęć
             this.Controls.Add(this.groupBoxResolution);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnApply);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormAdvanced";

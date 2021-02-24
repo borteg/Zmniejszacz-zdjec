@@ -50,6 +50,16 @@ namespace Zmniejszacz_zdjęć
 
             if(Install.IsAdmin())
             {
+                if(Install.IsInstall())
+                {
+                    btnInstall.Text = "Odinstaluj";
+                }
+
+                else
+                {
+                    btnInstall.Text = "Instaluj";
+                }
+
                 btnInstall.Enabled = true;
                 labelAdminInfo.Visible = false;
             }
@@ -81,6 +91,27 @@ namespace Zmniejszacz_zdjęć
             else
             {
                 btnApply.Enabled = true;
+            }
+        }
+
+        private void btnInstall_Click(object sender, EventArgs e)
+        {
+            if(Install.IsInstall())
+            {
+                Install.Remove();
+
+                MessageBox.Show("Odinstalowano pomyślnie!");
+
+                btnInstall.Text = "Instaluj";
+            }
+
+            else
+            {
+                Install.Installation();
+
+                MessageBox.Show("Zainstalowano pomyślnie!");
+
+                btnInstall.Text = "Odinstaluj";
             }
         }
     }

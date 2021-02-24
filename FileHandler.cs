@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -11,7 +12,7 @@ namespace Zmniejszacz_zdjęć
 {
     class FileHandler
     {
-        private static List<string> files = new List<string>();
+        private static ObservableCollection<string> files = new ObservableCollection<string>();
 
         public static void AddFiles(string[] newFiles)
         {
@@ -25,7 +26,7 @@ namespace Zmniejszacz_zdjęć
             files.Add(newFile);
         }
 
-        public static List<string> ReadFiles()
+        public static ObservableCollection<string> ReadFiles()
         {
             return files;
         }
