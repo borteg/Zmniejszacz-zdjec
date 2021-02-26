@@ -27,7 +27,7 @@ namespace Zmniejszacz_zdjęć
 
         private static string versionKey = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
         private static string currentAppPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-        private static string installationPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), author, appName, Path.GetFileName(currentAppPath));
+        private static string installationPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), author, appName, appName + ".exe");
         private static string shellAppPath = "\"" + installationPath + "\"" + " " + "\"%1\"";
         private static string shellIconPath = "\"" + installationPath + "\"";
 
