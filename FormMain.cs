@@ -163,22 +163,23 @@ namespace Zmniejszacz_zdjęć
             {
                 try
                 {
-                    Image image = Image.FromFile(FileHandler.ReadFiles()[this.imgList.SelectedIndex]);
-
-                    stream.Position = 0;
-
-                    image.Save(stream, image.RawFormat);
-
-                    image.Dispose();
-
-                    if(previewPic.Image != null)
+                    using (Image image = Image.FromFile(FileHandler.ReadFiles()[this.imgList.SelectedIndex]))
                     {
-                        previewPic.Image.Dispose();
+                        stream.Position = 0;
+
+                        image.Save(stream, image.RawFormat);
+
+                        image.Dispose();
+
+                        if (previewPic.Image != null)
+                        {
+                            previewPic.Image.Dispose();
+                        }
+
+                        previewPic.Image = Image.FromStream(stream);
+
+                        previewPic.Cursor = Cursors.Hand;
                     }
-
-                    previewPic.Image = Image.FromStream(stream);
-
-                    previewPic.Cursor = Cursors.Hand;
                 }
 
                 catch (FileNotFoundException)
@@ -265,19 +266,21 @@ namespace Zmniejszacz_zdjęć
         {
             if (previewPic.Image != null)
             {
-                FormPicture formPicture = new FormPicture();
+                using (FormPicture formPicture = new FormPicture())
+                {
+                    formPicture.SetPicture(stream);
 
-                formPicture.SetPicture(stream);
-
-                formPicture.ShowDialog();
+                    formPicture.ShowDialog();
+                }
             }
         }
 
         private void btnAdvanced_Click(object sender, EventArgs e)
         {
-            FormAdvanced formAdvanced = new FormAdvanced();
-
-            formAdvanced.ShowDialog();
+            using (FormAdvanced formAdvanced = new FormAdvanced())
+            {
+                formAdvanced.ShowDialog();
+            }
         }
     }
 }

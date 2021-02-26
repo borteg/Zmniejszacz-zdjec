@@ -17,6 +17,14 @@ namespace Zmniejszacz_zdjęć
             InitializeComponent();
         }
 
+        private void FormPicture_Closing(object sender, FormClosingEventArgs e)
+        {
+            if(previewPicForm.Image != null)
+            {
+                previewPicForm.Image.Dispose();
+            }
+        }
+
         public void SetPicture(MemoryStream stream)
         {
             previewPicForm.Image = Image.FromStream(stream);

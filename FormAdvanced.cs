@@ -98,20 +98,33 @@ namespace Zmniejszacz_zdjęć
         {
             if(Install.IsInstall())
             {
-                Install.Remove();
+                if(Install.Remove())
+                {
+                    MessageBox.Show("Odinstalowano pomyślnie", "Podsumowanie", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                MessageBox.Show("Odinstalowano pomyślnie!");
+                    btnInstall.Text = "Instaluj";
+                }
 
-                btnInstall.Text = "Instaluj";
+                else
+                {
+                    MessageBox.Show("Wystąpił błąd podczas deinstalacji", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
             }
 
             else
             {
-                Install.Installation();
+                if(Install.Installation())
+                {
+                    MessageBox.Show("Zainstalowano pomyślnie", "Podsumowanie", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                MessageBox.Show("Zainstalowano pomyślnie!");
+                    btnInstall.Text = "Odinstaluj";
+                }
 
-                btnInstall.Text = "Odinstaluj";
+                else
+                {
+                    MessageBox.Show("Wystąpił błąd podczas instalacji", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
     }

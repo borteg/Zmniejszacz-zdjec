@@ -1,4 +1,7 @@
-﻿namespace Zmniejszacz_zdjęć
+﻿using System;
+using System.ComponentModel;
+
+namespace Zmniejszacz_zdjęć
 {
     partial class FormPicture
     {
@@ -56,7 +59,7 @@
             this.Text = "Podgląd";
             ((System.ComponentModel.ISupportInitialize)(this.previewPicForm)).EndInit();
             this.ResumeLayout(false);
-
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormPicture_Closing);
         }
 
         #endregion

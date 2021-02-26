@@ -29,6 +29,7 @@ namespace Zmniejszacz_zdjęć
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAdvanced));
             this.btnApply = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.changedQuality = new System.Windows.Forms.ComboBox();
@@ -257,10 +258,12 @@ namespace Zmniejszacz_zdjęć
             this.Controls.Add(this.groupBoxResolution);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnApply);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormAdvanced";
+            this.ShowIcon = false;
             this.Text = "Zaawansowane";
             this.Load += new System.EventHandler(this.FormAdvanced_Load);
             this.groupBoxResolution.ResumeLayout(false);

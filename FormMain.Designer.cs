@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.previewPic = new System.Windows.Forms.PictureBox();
             this.addBtn = new System.Windows.Forms.Button();
             this.saveBtn = new System.Windows.Forms.Button();
@@ -169,6 +170,7 @@
             this.Controls.Add(this.groupBoxPictures);
             this.Controls.Add(this.btnAdvanced);
             this.Controls.Add(this.previewPic);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FormMain";
             this.Text = "Zmniejszacz Zdjęć";
