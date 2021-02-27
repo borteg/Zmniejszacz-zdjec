@@ -128,6 +128,8 @@ namespace Zmniejszacz_zdjęć
             Save();
 
             srv.Close();
+
+            Environment.Exit(0);
         }
 
         private static void AddFiles(string[] files)
