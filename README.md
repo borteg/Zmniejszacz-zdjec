@@ -14,3 +14,6 @@ Do obsługi zdjęć została wykorzystana systemowa biblioteka GDI+.
 - Zmniejszanie przez CMD po podaniu bezpośrednich ścieżek plików
 - Zmniejszanie poprzez przeciągnięcie plików na plik wykonywalny "Zmniejszacza" lub jego skrót
 - Wbudowany de/instalator (kopiuje plik wykonywalny do stworzonego przez siebie folderu w "Program Files", a następnie tworzy wpisy w rejestrze do obsługi szybkiego zmniejszania oraz skrót na pulpicie. Przy deinstalacji wszystko to usuwa. Wymagane uprawnienia administratora)
+
+# Wymagania
+- .NET Framework 4
