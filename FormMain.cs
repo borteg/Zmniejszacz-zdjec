@@ -77,11 +77,13 @@ namespace Zmniejszacz_zdjęć
             if(imgList.Items.Count > 0)
             {
                 saveBtn.Enabled = true;
+                clrButton.Enabled = true;
             }
 
             else
             {
                 saveBtn.Enabled = false;
+                clrButton.Enabled = false;
             }
         }
 

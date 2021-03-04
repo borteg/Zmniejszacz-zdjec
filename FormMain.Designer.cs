@@ -115,6 +115,7 @@
             // 
             // clrButton
             // 
+            this.clrButton.Enabled = false;
             this.clrButton.Location = new System.Drawing.Point(109, 25);
             this.clrButton.Name = "clrButton";
             this.clrButton.Size = new System.Drawing.Size(75, 23);
