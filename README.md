@@ -17,3 +17,6 @@ Do obsługi zdjęć została wykorzystana systemowa biblioteka GDI+.
 
 # Wymagania
 - .NET Framework 4
+
+# Zrzut ekranu
+![screenshot](https://user-images.githubusercontent.com/60829779/110080624-fe47a880-7d8a-11eb-9c33-464d9ab09c5d.jpg)
